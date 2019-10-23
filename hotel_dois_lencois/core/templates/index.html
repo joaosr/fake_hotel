@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hotel Dois Lençois</title>
+
+  </head>
+
+  <body>
+    <form action="." method="post">
+      <div class="input-group input-group-newsletter">
+        {% csrf_token %}
+        {{ form.email.erros }}
+        {{ form.date_in }}
+        {{ form.date_out }}
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="submit">Ok</button>
+        </span>
+      </div>
+    </form>
+  </body>
+
+</html>
