@@ -17,14 +17,23 @@
     <form action="." method="post">
       <div class="input-group input-group-newsletter">
         {% csrf_token %}
-        {{ form.email.erros }}
+        {{ form.date_in.erros }}
         {{ form.date_in }}
+        {{ form.date_out.erros }}
         {{ form.date_out }}
+        {{ form.guests }}
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="submit">Ok</button>
         </span>
       </div>
     </form>
+    {% if messages %}
+      {% for message in messages %}
+        <dir>
+          <p>{{ message }}</p>
+        </dir>
+      {% endfor %}
+    {% endif %}
   </body>
 
 </html>
