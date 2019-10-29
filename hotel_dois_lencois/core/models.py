@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 class Reservation(models.Model):
     date_in = models.DateField('Date In', blank=False, null=False)
@@ -22,6 +23,12 @@ class Room(models.Model):
     def __str__(self):
         return str(self.number)
 
+    @staticmethod
+    def find_vacant_room_for_period(date_from, date_to):
+        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(date_from, date_to)
+        return Room.objects.exclude(id__in=occupiedRooms.values('room'))
+
+
 class OccupiedRoom(models.Model):
     check_in = models.DateField('Check In', blank=False, null=False)
     check_out = models.DateField('Check Out', blank=False, null=False)
@@ -31,3 +38,10 @@ class OccupiedRoom(models.Model):
 
     def __str__(self):
         return str(self.room.number)
+
+    @staticmethod
+    def find_occupied_rooms_in_period(date_from, date_to):
+        return OccupiedRoom.objects.filter(
+            Q(check_in__lt=date_from, check_out__gt=date_from) |
+            Q(check_in__lt=date_to, check_out__gt=date_to)
+        )

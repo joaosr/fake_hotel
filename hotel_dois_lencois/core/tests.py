@@ -33,6 +33,7 @@ class ReservationModelTest(TestCase):
     def test_str(self):
         self.assertEqual('2019-10-01;2019-10-10', str(self.obj))
 
+
 class RoomModelTest(TestCase):
     def setUp(self):
         self.obj = Room(
@@ -51,24 +52,49 @@ class RoomModelTest(TestCase):
     def test_str(self):
         self.assertEqual('1', str(self.obj))
 
+    def test_find_vacant_room_for_period(self):
+        reservation = Reservation(
+            date_in='2019-10-01',
+            date_out='2019-10-15'
+        )
+        occupiedRoom = OccupiedRoom(
+            check_in=reservation.date_in,
+            check_out=reservation.date_out,
+            room=self.obj,
+            reservation=reservation
+        )
+
+        rooms = Room.find_vacant_room_for_period(
+            '2020-01-01',
+            '2020-01-15')
+
+        self.assertEqual(rooms.count(), 1)
+
+
 class OccupiedRoomModelTest(TestCase):
     def setUp(self):
-        room = Room(
+        self.room = Room(
             number=1,
             status='Occupied'
         )
-        reservation = Reservation(
-            date_in='2019-10-01',
+        self.reservation = Reservation(
+            date_in='2019-10-05',
             date_out='2019-10-10'
         )
-        reservation.save()
-        room.save()
+        self.reservation.save()
+        self.room.save()
 
         self.obj = OccupiedRoom(
             check_in='2019-10-01',
             check_out='2019-10-15',
-            room=room,
-            reservation=reservation
+            room=self.room,
+            reservation=self.reservation
+        )
+        self.obj = OccupiedRoom(
+            check_in='2019-10-01',
+            check_out='2019-10-15',
+            room=self.room,
+            reservation=self.reservation
         )
         self.obj.save()
 
@@ -81,6 +107,20 @@ class OccupiedRoomModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('1', str(self.obj))
+
+    def test_occupied_rooms_in_period(self):
+        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(
+            self.reservation.date_in,
+            self.reservation.date_out)
+
+        self.assertEqual(occupiedRooms.first().room, self.room)
+
+    def test_no_occupied_rooms_in_period(self):
+        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(
+            '2020-01-01',
+            '2020-01-15')
+
+        self.assertEqual(occupiedRooms.count(), 0)
 
 
 class TestReservationPost(TestCase):
