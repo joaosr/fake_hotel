@@ -12,7 +12,7 @@ class HomeTest(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'index.html')
+        self.assertTemplateUsed(self.response, 'reservation.html')
 
 
 class ReservationModelTest(TestCase):
@@ -130,7 +130,3 @@ class TestReservationPost(TestCase):
 
     def test_post(self):
         self.assertEqual(200, self.resp.status_code)
-
-    def test_post_content(self):
-        content = b'{"nome": "Joao"}'
-        self.assertEqual(self.resp.content, content)

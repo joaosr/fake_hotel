@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <form action="." method="post">
+    <div class="input-group input-group-newsletter">
+      {% csrf_token %}
+      {{ form.date_in.erros }}
+      {{ form.date_in }}
+      {{ form.date_out.erros }}
+      {{ form.date_out }}
+      {{ form.guest_number }}
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="submit">Ok</button>
+      </span>
+    </div>
+  </form>
+  {% if rooms %}
+      <p>Some rooms are available.</p>
+  {% else %}
+      <p>No rooms are available.</p>
+  {% endif %}
+{% endblock %}

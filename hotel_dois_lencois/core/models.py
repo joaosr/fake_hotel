@@ -4,6 +4,7 @@ from django.db.models import Q
 class Reservation(models.Model):
     date_in = models.DateField('Date In', blank=False, null=False)
     date_out = models.DateField('Date Out', blank=False, null=False)
+    guest_number = models.IntegerField('Number of guests', blank=False, null=False, default=1)
     created_at = models.DateTimeField('Created at', auto_now_add=True)
 
     def __str__(self):
