@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.test import TestCase
-from hotel_dois_lencois.core.models import Reservation, Room, OccupiedRoom
+from hotel_dois_lencois.core.models import Reservation, Room, RoomType, OccupiedRoom
+from hotel_dois_lencois.core import views
 
 # Create your tests here.
 class HomeTest(TestCase):
@@ -27,7 +28,7 @@ class ReservationModelTest(TestCase):
         self.assertTrue(Reservation.objects.exists())
 
     def test_created_at(self):
-        """ Room must have an auto created at attr."""
+        """ Reservation must have an auto created at attr."""
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
@@ -36,9 +37,17 @@ class ReservationModelTest(TestCase):
 
 class RoomModelTest(TestCase):
     def setUp(self):
+        room_type = RoomType(
+            max_capacity=2,
+            description='Suite'
+        )
+
+        room_type.save()
+
         self.obj = Room(
             number=1,
-            status='Occupied'
+            status='Occupied',
+            room_type=room_type
         )
         self.obj.save()
 
@@ -46,7 +55,7 @@ class RoomModelTest(TestCase):
         self.assertTrue(Room.objects.exists())
 
     def test_created_at(self):
-        """ Reservation must have an auto created at attr."""
+        """ Room must have an auto created at attr."""
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
@@ -64,7 +73,7 @@ class RoomModelTest(TestCase):
             reservation=reservation
         )
 
-        rooms = Room.find_vacant_room_for_period(
+        rooms = views.find_vacant_room_for_period(
             '2020-01-01',
             '2020-01-15')
 
@@ -73,9 +82,17 @@ class RoomModelTest(TestCase):
 
 class OccupiedRoomModelTest(TestCase):
     def setUp(self):
+        room_type = RoomType(
+            max_capacity=2,
+            description='Suite'
+        )
+
+        room_type.save()
+
         self.room = Room(
             number=1,
-            status='Occupied'
+            status='Occupied',
+            room_type=room_type
         )
         self.reservation = Reservation(
             date_in='2019-10-05',
@@ -109,14 +126,14 @@ class OccupiedRoomModelTest(TestCase):
         self.assertEqual('1', str(self.obj))
 
     def test_occupied_rooms_in_period(self):
-        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(
+        occupiedRooms = views.find_occupied_rooms_in_period(
             self.reservation.date_in,
             self.reservation.date_out)
 
         self.assertEqual(occupiedRooms.first().room, self.room)
 
     def test_no_occupied_rooms_in_period(self):
-        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(
+        occupiedRooms = views.find_occupied_rooms_in_period(
             '2020-01-01',
             '2020-01-15')
 

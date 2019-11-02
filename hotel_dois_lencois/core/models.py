@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Q
 
 class Reservation(models.Model):
     date_in = models.DateField('Date In', blank=False, null=False)
@@ -10,6 +9,14 @@ class Reservation(models.Model):
     def __str__(self):
         return "{0};{1}".format(self.date_in,self.date_out)
 
+class RoomType(models.Model):
+    description = models.TextField('Description', blank=True, null=True)
+    max_capacity = models.IntegerField('Max Capacity', blank=False, null=False, default=1)
+    created_at = models.DateTimeField('Created at', auto_now_add=True)
+
+    def __str__(self):
+        return self.description
+
 class Room(models.Model):
     OCCUPIED = 'Occupied'
     VACANT = 'Vacant'
@@ -19,15 +26,11 @@ class Room(models.Model):
     )
     number = models.IntegerField('Number', blank=False, null=False)
     status = models.CharField('Status', max_length=20, choices=ROOM_STATUS)
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
     created_at = models.DateTimeField('Created at', auto_now_add=True)
 
     def __str__(self):
         return str(self.number)
-
-    @staticmethod
-    def find_vacant_room_for_period(date_from, date_to):
-        occupiedRooms = OccupiedRoom.find_occupied_rooms_in_period(date_from, date_to)
-        return Room.objects.exclude(id__in=occupiedRooms.values('room'))
 
 
 class OccupiedRoom(models.Model):
@@ -39,10 +42,3 @@ class OccupiedRoom(models.Model):
 
     def __str__(self):
         return str(self.room.number)
-
-    @staticmethod
-    def find_occupied_rooms_in_period(date_from, date_to):
-        return OccupiedRoom.objects.filter(
-            Q(check_in__lt=date_from, check_out__gt=date_from) |
-            Q(check_in__lt=date_to, check_out__gt=date_to)
-        )

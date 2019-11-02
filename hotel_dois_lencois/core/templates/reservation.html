@@ -16,7 +16,11 @@
     </div>
   </form>
   {% if rooms %}
-      <p>Some rooms are available.</p>
+    <ul>
+      {% for room in rooms %}
+          <li>Room {{ room.number }}</li>
+      {% endfor %}
+    </ul>
   {% else %}
       <p>No rooms are available.</p>
   {% endif %}
