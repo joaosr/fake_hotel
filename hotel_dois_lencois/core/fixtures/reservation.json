@@ -1,0 +1,62 @@
+[
+  {
+    "model": "core.reservation",
+    "pk": 1,
+    "fields": {
+      "date_in": "2019-12-15",
+      "date_out": "2019-12-20",
+      "guest_number": 3,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.reservation",
+    "pk": 2,
+    "fields": {
+      "date_in": "2020-01-04",
+      "date_out": "2020-01-10",
+      "guest_number": 2,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.reservation",
+    "pk": 3,
+    "fields": {
+      "date_in": "2019-12-01",
+      "date_out": "2019-12-04",
+      "guest_number": 4,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.reservation",
+    "pk": 4,
+    "fields": {
+      "date_in": "2019-11-21",
+      "date_out": "2019-11-23",
+      "guest_number": 1,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.reservation",
+    "pk": 5,
+    "fields": {
+      "date_in": "2019-12-23",
+      "date_out": "2019-12-25",
+      "guest_number": 5,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.reservation",
+    "pk": 6,
+    "fields": {
+      "date_in": "2019-12-20",
+      "date_out": "2019-12-26",
+      "guest_number": 3,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  }
+]

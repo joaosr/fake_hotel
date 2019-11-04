@@ -26,9 +26,8 @@ def reservation(request):
 
 def find_vacant_room_for_period(date_from, date_to):
     occupiedRooms = find_occupied_rooms_in_period(date_from, date_to)
-    return Room.objects.exclude(id__in=occupiedRooms.values('room'))
-    # rooms = Room.objects.exclude(id__in=occupiedRooms.values('room'))
-    # return group_by_room_type(rooms)
+    rooms = Room.objects.exclude(id__in=occupiedRooms.values('room'))
+    return group_by_room_type(rooms)
 
 def find_occupied_rooms_in_period(date_from, date_to):
     return OccupiedRoom.objects.filter(
@@ -37,4 +36,4 @@ def find_occupied_rooms_in_period(date_from, date_to):
     )
 
 def group_by_room_type(rooms):
-    return rooms.values('room_type').annotate(room_available=Count('id'))
+    return rooms.values('room_type__description', 'room_type__max_capacity').annotate(room_available=Count('id'))

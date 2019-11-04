@@ -1,0 +1,79 @@
+[
+  {
+    "model": "core.occupiedroom",
+    "pk": 1,
+    "fields": {
+      "check_in": "2019-12-15",
+      "check_out": "2019-12-20",
+      "room": 5,
+      "reservation": 1,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 2,
+    "fields": {
+      "check_in": "2020-01-04",
+      "check_out": "2020-01-10",
+      "room": 3,
+      "reservation": 2,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 3,
+    "fields": {
+      "check_in": "2019-12-01",
+      "check_out": "2019-12-04",
+      "room": 5,
+      "reservation": 3,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 4,
+    "fields": {
+      "check_in": "2019-11-21",
+      "check_out": "2019-11-23",
+      "room": 1,
+      "reservation": 4,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 5,
+    "fields": {
+      "check_in": "2019-12-23",
+      "check_out": "2019-12-25",
+      "room": 5,
+      "reservation": 5,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 6,
+    "fields": {
+      "check_in": "2019-12-23",
+      "check_out": "2019-12-25",
+      "room": 2,
+      "reservation": 5,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  },
+  {
+    "model": "core.occupiedroom",
+    "pk": 7,
+    "fields": {
+      "check_in": "2019-12-20",
+      "check_out": "2019-12-26",
+      "room": 6,
+      "reservation": 6,
+      "created_at": "2019-10-01 00:00:00"
+    }
+  }
+]
