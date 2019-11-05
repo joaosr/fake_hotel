@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.test import TestCase
-from hotel_dois_lencois.core.models import Reservation, Room, RoomType, OccupiedRoom
-from hotel_dois_lencois.core import views
+from fake_hotel.core.models import Reservation, Room, RoomType, OccupiedRoom
+from fake_hotel.core import views
 
 # Create your tests here.
 class HomeTest(TestCase):

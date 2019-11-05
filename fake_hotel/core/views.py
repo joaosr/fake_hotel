@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q, Count
-from hotel_dois_lencois.core.forms import ReservationForm
-from hotel_dois_lencois.core.models import Room, Reservation, OccupiedRoom
+from fake_hotel.core.forms import ReservationForm
+from fake_hotel.core.models import Room, Reservation, OccupiedRoom
 
 # Create your views here.
 def reservation(request):

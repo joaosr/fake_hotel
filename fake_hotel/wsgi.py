@@ -1,5 +1,5 @@
 """
-WSGI config for hotel_dois_lencois project.
+WSGI config for fake_hotel project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hotel_dois_lencois.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fake_hotel.settings')
 
 application = get_wsgi_application()

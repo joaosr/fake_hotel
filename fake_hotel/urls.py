@@ -1,4 +1,4 @@
-"""hotel_dois_lencois URL Configuration
+"""fake_hotel URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from hotel_dois_lencois.core import views
+from fake_hotel.core import views
 
 app_name = 'core'
 urlpatterns = [
